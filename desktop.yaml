@@ -1,0 +1,8 @@
+---
+- name: Provision Personal Computer
+  hosts: local
+  become_user: root
+  become: yes
+  roles:
+    - common
+    - desktop
