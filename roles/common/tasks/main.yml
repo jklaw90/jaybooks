@@ -51,7 +51,7 @@
 
 - name: Update {{ user_name }} profile
   lineinfile:
-    path: '/home/{{ user_name }}/.profile'
+    dest: '/home/{{ user_name }}/.profile'
     line: 'export PATH=$PATH:/usr/local/go/bin'
 
 - name: Update {{ user_name }} bashrc
