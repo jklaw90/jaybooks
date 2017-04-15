@@ -1,4 +1,7 @@
 ---
+- name: "FIX: Ubuntu 16.04 LTS doesn't come with certain modules, required by ansible"
+  raw: apt-get install python-minimal aptitude -y
+
 - name: Apt Update
   apt:
     update_cache: yes
@@ -41,18 +44,19 @@
     checksum: sha256:"{{ go_checksum }}"
 
 - name: Unarchive Go
-  unarchive:
+  unarchive: 
+    creates: /usr/local/go
     src: /tmp/go.tar.gz
-    dest: /usr/local/go
+    dest: /usr/local
 
 - name: Update {{ user_name }} profile
   lineinfile:
-    path: /home/{{ user_name }}/.profile
+    path: '/home/{{ user_name }}/.profile'
     line: 'export PATH=$PATH:/usr/local/go/bin'
 
 - name: Update {{ user_name }} bashrc
   blockinfile:
-    path: /home/{{ user_name }}/.bashrc
+    dest: '/home/{{ user_name }}/.bashrc'
     block: |
       export GOPATH=$HOME/go
       export PATH=$PATH:$GOPATH/bin
@@ -61,3 +65,7 @@
       alias gff='git flow feature finish'
       alias grs='git flow release start'
       alias grf='git flow release finish'
+
+# Docker
+- name: Add User to Docker Group
+  command: sudo usermod -aG docker {{ user_name }}

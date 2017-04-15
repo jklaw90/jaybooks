@@ -1,8 +1,10 @@
 ---
 - name: Provision Personal Computer
-  hosts: local
-  become_user: root
+  hosts: 127.0.0.1
+  connection: local
   become: yes
+  become_user: root
+  become_method: sudo
   roles:
     - common
     - desktop
