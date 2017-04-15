@@ -23,6 +23,48 @@
     - docker.io
     - openvpn
 
+# SSH Config
+- name: Install User SSH keys
+  authorized_key:
+    user: "{{user_name}}"
+    state: present
+    key: "{{item}}"
+  with_file:
+    - keys/id_rsa.pub
+  
+- name: Prepare {{ user_name }} .ssh file
+  file:
+    path: /home/{{ user_name }}/.ssh
+    state: directory
+    owner: '{{ user_name }}'
+    group: '{{ user_name }}'
+    mode: 0700
+
+- name: Ensure private key exists
+  copy:
+    dest: /home/{{ user_name }}/.ssh/id_rsa
+    src: keys/id_rsa
+    mode: 0400
+    owner: '{{ user_name }}'
+    group: '{{ user_name }}'
+
+- name: Ensure public key exists
+  copy:
+    dest: /home/{{ user_name }}/.ssh/id_rsa.pub"
+    src: keys/id_rsa.pub
+    mode: 0400
+    owner: '{{ user_name }}'
+    group: '{{ user_name }}'
+
+- name: Ensure config exists
+  copy:
+    dest: /home/{{ user_name }}/.ssh/config"
+    src: keys/config
+    mode: 0600
+    owner: '{{ user_name }}'
+    group: '{{ user_name }}'
+
+
 # Git Config
 - name: Git Name
   git_config:
