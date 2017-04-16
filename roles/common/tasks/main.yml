@@ -10,6 +10,7 @@
 - name: Install Programs
   apt: pkg="{{ item }}" state="present"
   with_items:
+    - openssh-server
     - build-essential
     - fail2ban
     - python3-dev
@@ -50,7 +51,7 @@
 
 - name: Ensure public key exists
   copy:
-    dest: /home/{{ user_name }}/.ssh/id_rsa.pub"
+    dest: /home/{{ user_name }}/.ssh/id_rsa.pub
     src: keys/id_rsa.pub
     mode: 0400
     owner: '{{ user_name }}'
@@ -58,13 +59,24 @@
 
 - name: Ensure config exists
   copy:
-    dest: /home/{{ user_name }}/.ssh/config"
+    dest: /home/{{ user_name }}/.ssh/config
     src: keys/config
     mode: 0600
     owner: '{{ user_name }}'
     group: '{{ user_name }}'
 
+- name: Copy sshd config
+  copy:
+    dest: /etc/ssh/sshd_config
+    src: keys/sshd_config
+    owner: 'root'
+    group: 'root'
+    mode: 0644
 
+- ufw:
+    rule: allow
+    name: OpenSSH
+    
 # Git Config
 - name: Git Name
   git_config:
