@@ -3,4 +3,5 @@
   with_items:
     - network-manager-openvpn
     - network-manager-openvpn-gnome
+    - gufw
     
