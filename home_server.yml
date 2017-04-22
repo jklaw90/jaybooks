@@ -1,0 +1,9 @@
+---
+- name: Provision Home Server
+  hosts: j-mini
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - server
+    - plex
