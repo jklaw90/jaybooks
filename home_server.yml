@@ -1,6 +1,6 @@
 ---
 - name: Provision Home Server
-  hosts: j-mini
+  hosts: homeserver
   become: yes
   become_user: root
   become_method: sudo
