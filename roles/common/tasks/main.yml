@@ -121,6 +121,8 @@
     block: |
       export GOPATH=$HOME/go
       export PATH=$PATH:$GOPATH/bin
+      export PATH=$PATH:/home/julian/Applications/protoc-3.1.0-linux-x86_64/bin
+      source /usr/local/bin/activate.sh
       alias got='go test -v --cover ./...'
       alias gfs='git flow feature start'
       alias gff='git flow feature finish'
