@@ -18,12 +18,18 @@
     - python3-pip
     - python-dev
     - python-pip
+    - python3-psycopg2
+    - python3-mysqldb
+    - python-psycopg2
+    - python-mysqldb
     - curl
     - traceroute
     - vim
     - git
     - docker.io
     - openvpn
+    - mysql-client
+    - redis-tools
 
 - name: Install Python deps
   pip: name={{ item }}
