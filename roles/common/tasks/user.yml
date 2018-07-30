@@ -32,7 +32,6 @@
       fi
       export GOPATH=$HOME/go
       export PATH=$PATH:$GOPATH/bin
-      source /usr/local/bin/activate.sh
       eval "$(direnv hook bash)"
 
 
