@@ -1,0 +1,5 @@
+- name: Install Python black
+  pip: 
+  executable: pip3 
+  extra_args: --user
+  name: black

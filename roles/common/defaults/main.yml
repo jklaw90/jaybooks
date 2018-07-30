@@ -1,8 +1,0 @@
----
-go_url: "https://storage.googleapis.com/golang/go1.8.1.linux-amd64.tar.gz"
-go_checksum: "a579ab19d5237e263254f1eac5352efcf1d70b9dacadb6d6bb12b0911ede8994"
-
-user_name: "julian"
-
-git_email: "julianlawrence@gmail.com"
-git_name: "Julian Lawrence"

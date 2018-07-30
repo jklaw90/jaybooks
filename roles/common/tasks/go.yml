@@ -1,0 +1,11 @@
+- name: Download GO
+  get_url:
+    url: "{{ go_url }}"
+    dest: /tmp/go.tar.gz
+    checksum: sha256:"{{ go_checksum }}"
+
+- name: Unarchive Go
+  unarchive: 
+    creates: /usr/local/go
+    src: /tmp/go.tar.gz
+    dest: /usr/local

@@ -1,0 +1,41 @@
+- name: allow '{{ user_name }}' to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    line: '{{ user_name }} ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+# Git Config
+- name: Git Name
+  git_config:
+    name: user.name
+    scope: global
+    value: '{{ git_name }}'
+
+- name: Git Email
+  git_config:
+    name: user.email
+    scope: global
+    value: '{{ git_email }}'
+
+# profile / bashrc
+- name: Update {{ user_name }} profile
+  lineinfile:
+    dest: '/home/{{ user_name }}/.profile'
+    line: 'export PATH=$PATH:/usr/local/go/bin'
+
+- name: Update {{ user_name }} bashrc
+  blockinfile:
+    dest: '/home/{{ user_name }}/.bashrc'
+    block: |
+      if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+          source /etc/profile.d/vte.sh
+      fi
+      export GOPATH=$HOME/go
+      export PATH=$PATH:$GOPATH/bin
+      source /usr/local/bin/activate.sh
+      eval "$(direnv hook bash)"
+
+
+# Docker
+- name: Add User to Docker Group
+  command: sudo usermod -aG docker {{ user_name }}

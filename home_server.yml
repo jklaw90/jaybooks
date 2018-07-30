@@ -1,9 +1,0 @@
----
-- name: Provision Home Server
-  hosts: homeserver
-  become: yes
-  become_user: root
-  become_method: sudo
-  roles:
-    - server
-    - plex
