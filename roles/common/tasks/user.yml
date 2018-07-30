@@ -7,12 +7,16 @@
 # Git Config
 - name: Git Name
   git_config:
+    become: yes
+    become_user: some_user
     name: user.name
     scope: global
     value: '{{ git_name }}'
 
 - name: Git Email
   git_config:
+    become: yes
+    become_user: some_user
     name: user.email
     scope: global
     value: '{{ git_email }}'

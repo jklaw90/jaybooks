@@ -11,6 +11,7 @@
     - openssh-server
     - fail2ban
     - build-essential
+    - python-dev
     - python3-dev
     - python3-pip
     - python3-virtualenv
@@ -19,6 +20,8 @@
     - docker.io
     - direnv
     - tilix
+    - cmake
+    - fonts-powerline
 
 - name: apt cache cleanup
   apt:
